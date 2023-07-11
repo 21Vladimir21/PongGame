@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
             moveToBall = true;
             while (true)
             {
-                yield return new WaitForSeconds(UnityEngine.Random.Range(3, 3.5f));
+                yield return new WaitForSeconds(UnityEngine.Random.Range(1, 3.5f));
                 moveToBall = !moveToBall;
             }
         }

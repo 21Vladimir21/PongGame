@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject PingPong;
     [SerializeField] private GameObject PingPongPanel;
-    [SerializeField] private GameObject Menu;
     [SerializeField] private GameObject BlueWinPanel;
     [SerializeField] private GameObject RedWinPanel;
 
@@ -38,13 +37,6 @@ public class GameManager : MonoBehaviour
         scoreManager.BluePlayerScore = 0;
         scoreManager.RedPlayerScore = 0;
     }
-
-    public void StartPongGame()
-    {
-        PingPongPanel.SetActive(true);
-        Menu.SetActive(false);
-    }
-
     private IEnumerator BlueWin()
     {
         BlueWinPanel.SetActive(true);
@@ -59,11 +51,9 @@ public class GameManager : MonoBehaviour
     }
     public void BackToMenu()
     {
-        RedWinPanel.SetActive(false);
-        BlueWinPanel.SetActive(false);
+        ResetScore();
         PingPong.SetActive(false);
-        PingPongPanel.SetActive(false);
-        Menu.SetActive(true);
+        PingPongPanel.SetActive(true);
     }
     public void PlayingWithOnePlayer()
     {
