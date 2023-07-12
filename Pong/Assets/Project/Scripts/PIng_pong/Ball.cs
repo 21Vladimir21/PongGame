@@ -3,20 +3,22 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] ScoreManager scoreManager;
     [SerializeField] private Rigidbody2D BallRb;
     [SerializeField] public float BallSpeed = 5;
     private Vector2 direction;
 
-    private void Start()
+    private void OnEnable()
     {
+        BallSpeed = 5;
         SetTheDirection();
     }
+
     private void FixedUpdate()
     {
         StartCoroutine(BallMove());
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
             direction.x = -direction.x;
@@ -33,7 +35,5 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(3);
         BallRb.velocity = direction.normalized * BallSpeed;
     }
-
-
 }
 

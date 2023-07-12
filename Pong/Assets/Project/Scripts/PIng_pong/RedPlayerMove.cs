@@ -9,7 +9,7 @@ public class RedPlayerMove : MoveLogic
     [SerializeField] GameManager gameManager;
     override public void Move()
     {
-        if (gameManager.TwoPlayers == false)
+        if (gameManager.EnemyAi == false)
         {
             if (Input.GetKey(KeyCode.M))
                 PlayerRb.velocity = Vector2.up * PlayerSpeed;
@@ -17,5 +17,16 @@ public class RedPlayerMove : MoveLogic
                 PlayerRb.velocity = Vector2.down * PlayerSpeed;
         }
 
+    }
+
+    override public void MobileMoveUp()
+    {
+        if (gameManager.EnemyAi == false)
+            PlayerRb.velocity = Vector2.down * PlayerSpeed;
+    }
+    override public void MobileMoveDown()
+    {
+        if (gameManager.EnemyAi == false)
+            PlayerRb.velocity = Vector2.up * PlayerSpeed;
     }
 }

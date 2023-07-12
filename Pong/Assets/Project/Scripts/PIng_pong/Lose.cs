@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class Lose : MonoBehaviour
 {
-    [SerializeField] Ball ball;
-    [SerializeField] ScoreManager scoreManager;
+    [SerializeField] private Ball ball;
+    [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private Transform BallPosition;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("BlueZone"))
         {
@@ -23,14 +23,16 @@ public class Lose : MonoBehaviour
             scoreManager.BluePlayerScore++;
             StartCoroutine(Wait());
         }
-
     }
     public IEnumerator Wait()
     {
+        GameManager.WhoWon.Invoke();
+        UI.RefreshScore.Invoke(scoreManager.BluePlayerScore, scoreManager.RedPlayerScore);
         ball.BallSpeed = 0;
         BallPosition.position = Vector2.zero;
         yield return new WaitForSeconds(3);
         ball.BallSpeed = 5;
+
 
     }
 

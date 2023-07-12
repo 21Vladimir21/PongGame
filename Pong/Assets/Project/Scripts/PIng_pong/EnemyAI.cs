@@ -1,33 +1,39 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] GameManager gameManager;
-    [SerializeField] private Transform player;
+
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private Rigidbody2D redPlayerRb;
     [SerializeField] private Transform ball;
-    private bool moveToBall;
+    private float MoveSpeed = 3;
+    private bool AllowedToMove = false;
     IEnumerator Start()
     {
-        if (gameManager.TwoPlayers == true)
+        if (gameManager.EnemyAi == true)
         {
-            moveToBall = true;
+            AllowedToMove = false;
             while (true)
             {
-                yield return new WaitForSeconds(UnityEngine.Random.Range(1, 3.5f));
-                moveToBall = !moveToBall;
+                Debug.Log("вошел в цикл" + AllowedToMove);
+                yield return new WaitForSeconds((Random.Range(3f, 5f)));
+
+                AllowedToMove = !AllowedToMove;
+                Debug.Log(" вышел из цикл цикла" + AllowedToMove);
             }
         }
-
     }
-    void Update()
+
+    private void FixedUpdate()
     {
 
-        if (moveToBall && gameManager.TwoPlayers == true)
+        if (AllowedToMove && gameManager.EnemyAi)
         {
-            player.position = Vector3.Lerp(player.position, new Vector3(player.position.x, ball.position.y, player.position.z), 3 * Time.deltaTime);
+            if (ball.position.y > redPlayerRb.position.y)
+                redPlayerRb.velocity = Vector2.up.normalized * MoveSpeed;
+            else
+                redPlayerRb.velocity = Vector2.down.normalized * MoveSpeed;
         }
-
     }
 }

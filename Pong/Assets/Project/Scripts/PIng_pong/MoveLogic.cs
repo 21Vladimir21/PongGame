@@ -10,9 +10,12 @@ abstract public class MoveLogic : MonoBehaviour
     [SerializeField] protected float PlayerSpeed = 3;
     void Update()
     {
-        Move();
+        if (Init.Instance.mobile == false)
+            Move();
     }
 
     abstract public void Move();
+    abstract public void MobileMoveUp();
+    abstract public void MobileMoveDown();
 
 }

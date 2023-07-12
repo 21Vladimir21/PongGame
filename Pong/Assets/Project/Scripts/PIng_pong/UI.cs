@@ -1,16 +1,23 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private TMP_Text BluePlayerScore;
     [SerializeField] private TMP_Text RedPlayerScore;
 
-    private void Update()
+    public static UnityEvent<int, int> RefreshScore = new UnityEvent<int, int>();
+
+    private void Awake()
     {
-        BluePlayerScore.text = Convert.ToString(scoreManager.BluePlayerScore);
-        RedPlayerScore.text = Convert.ToString(scoreManager.RedPlayerScore);
+        RefreshScore.AddListener(Score);
+    }
+
+    private void Score(int blueScore, int redScore)
+    {
+        BluePlayerScore.text = Convert.ToString(blueScore);
+        RedPlayerScore.text = Convert.ToString(redScore);
     }
 }
