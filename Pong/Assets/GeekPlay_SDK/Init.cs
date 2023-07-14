@@ -266,7 +266,7 @@ public class Init : MonoBehaviour
                 ShowInterstitialAd();
                 break;
             case Platform.VK:
-                language = "ru";
+                language = "en";
                 Localization();
                 StartCoroutine(BannerVK());
                 StartCoroutine(RewardLoad());

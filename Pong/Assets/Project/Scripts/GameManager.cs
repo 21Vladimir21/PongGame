@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject PingPongPanel;
     [SerializeField] private GameObject BlueWinPanel;
     [SerializeField] private GameObject RedWinPanel;
+
     private int numberOfGames = 0;
 
     public bool EnemyAi = false;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WinScrens(true));
 
         if (scoreManager.RedPlayerScore >= 5)
+
             StartCoroutine(WinScrens(false));
     }
     public void ResetScore()

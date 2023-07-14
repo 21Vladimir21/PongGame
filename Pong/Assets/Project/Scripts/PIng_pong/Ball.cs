@@ -5,12 +5,12 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] ScoreManager scoreManager;
     [SerializeField] private Rigidbody2D BallRb;
-    [SerializeField] public float BallSpeed = 5;
+    [SerializeField] public float BallSpeed = 9;
     private Vector2 direction;
 
     private void OnEnable()
     {
-        BallSpeed = 5;
+        BallSpeed = 9;
         SetTheDirection();
     }
 

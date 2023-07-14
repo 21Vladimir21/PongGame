@@ -10,6 +10,7 @@ public class Lose : MonoBehaviour
     [SerializeField] private Ball ball;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private Transform BallPosition;
+    [SerializeField] private GameObject Timer;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,12 +29,11 @@ public class Lose : MonoBehaviour
     {
         GameManager.WhoWon.Invoke();
         UI.RefreshScore.Invoke(scoreManager.BluePlayerScore, scoreManager.RedPlayerScore);
+        Timer.SetActive(true);
         ball.BallSpeed = 0;
         BallPosition.position = Vector2.zero;
         yield return new WaitForSeconds(3);
-        ball.BallSpeed = 5;
-
-
+        ball.BallSpeed = 9;
     }
 
 }

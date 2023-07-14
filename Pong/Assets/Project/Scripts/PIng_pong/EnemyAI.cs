@@ -9,25 +9,24 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Transform ball;
     private float MoveSpeed = 3;
     private bool AllowedToMove = false;
-    IEnumerator Start()
+    private IEnumerator Start()
     {
         if (gameManager.EnemyAi == true)
         {
-            AllowedToMove = false;
             while (true)
             {
-                Debug.Log("вошел в цикл" + AllowedToMove);
                 yield return new WaitForSeconds((Random.Range(3f, 5f)));
-
                 AllowedToMove = !AllowedToMove;
-                Debug.Log(" вышел из цикл цикла" + AllowedToMove);
             }
         }
+    }
+    public void StartCoroutine()
+    {
+        StartCoroutine(Start());
     }
 
     private void FixedUpdate()
     {
-
         if (AllowedToMove && gameManager.EnemyAi)
         {
             if (ball.position.y > redPlayerRb.position.y)
