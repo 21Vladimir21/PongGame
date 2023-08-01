@@ -3,10 +3,10 @@ using System.Runtime.InteropServices;
 using System.Collections;
 using UnityEngine;
 
-public enum Platform
+public enum Platform 
 {
     Editor,
-    Yandex,
+    Yandex, 
     VK,
     GameArter
 }
@@ -30,7 +30,7 @@ public class Init : MonoBehaviour
     string purchasedTag; //Тэг покупки
     public bool wasLoad; //Игра загружалась?
     bool canShowAd = true; //Можно ли проигрывать рекламу на вк?
-    // string developerNameYandex = "GeeKid%20-%20школа%20программирования";
+    string developerNameYandex = "GeeKid%20-%20школа%20программирования";
 
     [Header("Localization")]
     public string language;
@@ -44,7 +44,7 @@ public class Init : MonoBehaviour
     {
         if (rewardTag == "Coins")
         {
-            playerData.intTest += 3; //ПРИСУЖДАЕМ НАГРАДУ
+        	playerData.intTest += 3; //ПРИСУЖДАЕМ НАГРАДУ
         }
         Debug.Log($"<color=yellow>REWARD:</color> {rewardTag}");
         Save();
@@ -89,10 +89,10 @@ public class Init : MonoBehaviour
                 Utils.AdReward();
                 break;
             case Platform.VK:
-                canShowAd = false;
-                StartCoroutine(CanAdShow());
-                rewardTag = idOrTag;
-                Utils.VK_Rewarded();
+                    canShowAd = false;
+                    StartCoroutine(CanAdShow());
+                    rewardTag = idOrTag;
+                    Utils.VK_Rewarded();
                 break;
         }
     }
@@ -106,10 +106,10 @@ public class Init : MonoBehaviour
                 break;
             case Platform.Yandex:
                 var domain = Utils.GetDomain();
-                // Application.OpenURL($"https://yandex.{domain}/games/developer?name=" + developerNameYandex);
+                Application.OpenURL($"https://yandex.{domain}/games/developer?name=" + developerNameYandex);
                 break;
             case Platform.VK:
-                rewardTag = "Group";
+            	rewardTag = "Group";
                 Utils.VK_ToGroup();
                 break;
         }
@@ -135,13 +135,13 @@ public class Init : MonoBehaviour
         switch (platform)
         {
             case Platform.Editor:
-                jsonString = JsonUtility.ToJson(playerData);
-                PlayerPrefs.SetString("PlayerData", jsonString);
+            	jsonString = JsonUtility.ToJson(playerData);
+            	PlayerPrefs.SetString("PlayerData", jsonString);
                 Debug.Log($"<color={colorDebug}>SAVE</color>");
                 break;
             case Platform.Yandex:
                 if (wasLoad)
-                {
+                {   
                     jsonString = JsonUtility.ToJson(playerData);
                     Utils.SaveExtern(jsonString);
                     Debug.Log("Save");
@@ -149,7 +149,7 @@ public class Init : MonoBehaviour
                 break;
             case Platform.VK:
                 if (wasLoad)
-                {
+                {   
                     jsonString = JsonUtility.ToJson(playerData);
                     Utils.VK_Save(jsonString);
                 }
@@ -176,7 +176,7 @@ public class Init : MonoBehaviour
 
     public void ToStarGame() //ДОБАВИТЬ В ИЗБРАННОЕ (ВК)
     {
-        switch (platform)
+    	switch (platform)
         {
             case Platform.Editor:
                 Debug.Log($"<color={colorDebug}>GAME TO STAR</color>");
@@ -191,7 +191,7 @@ public class Init : MonoBehaviour
 
     public void ShareGame() //ПОДЕЛИТЬСЯ ИГРОЙ (ВК)
     {
-        switch (platform)
+    	switch (platform)
         {
             case Platform.Editor:
                 Debug.Log($"<color={colorDebug}>SHARE</color>");
@@ -206,7 +206,7 @@ public class Init : MonoBehaviour
 
     public void InvitePlayers() //ПРИГЛАСИТЬ ИГРОКОВ (ВК)
     {
-        switch (platform)
+    	switch (platform)
         {
             case Platform.Editor:
                 Debug.Log($"<color={colorDebug}>INVITE</color>");
@@ -222,10 +222,10 @@ public class Init : MonoBehaviour
 
 
     //ДЛЯ РАБОТЫ - ТРОГАТЬ НЕ НАДО
-    protected void Awake()
+	protected void Awake()
     {
-        //Синглтон
-        if (!Instance)
+    	//Синглтон
+    	if (!Instance)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -252,8 +252,8 @@ public class Init : MonoBehaviour
                 StartCoroutine(BannerVK());
                 if (PlayerPrefs.HasKey("PlayerData"))
                 {
-                    string s = PlayerPrefs.GetString("PlayerData");
-                    playerData = JsonUtility.FromJson<PlayerData>(s);
+                	string s = PlayerPrefs.GetString("PlayerData");
+                	playerData = JsonUtility.FromJson<PlayerData>(s);
                 }
                 language = "tr"; //ВЫБРАТЬ ЯЗЫК ДЛЯ ТЕСТОВ. ru/en/tr\
                 Localization();
@@ -266,7 +266,7 @@ public class Init : MonoBehaviour
                 ShowInterstitialAd();
                 break;
             case Platform.VK:
-                language = "en";
+                language = "ru";
                 Localization();
                 StartCoroutine(BannerVK());
                 StartCoroutine(RewardLoad());
@@ -285,8 +285,8 @@ public class Init : MonoBehaviour
 
     IEnumerator RewardLoad()
     {
-        yield return new WaitForSeconds(15);
-        switch (platform)
+    	yield return new WaitForSeconds(15);
+    	switch (platform)
         {
             case Platform.Editor:
                 Debug.Log($"<color={colorDebug}>REWARD LOAD</color>");
@@ -299,29 +299,29 @@ public class Init : MonoBehaviour
 
     IEnumerator InterLoad()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(15);
-            switch (platform)
-            {
-                case Platform.Editor:
-                    Debug.Log($"<color={colorDebug}>INTERSTITIAL LOAD</color>");
-                    break;
-                case Platform.VK:
-                    Utils.VK_AdInterCheck();
-                    break;
-            }
-        }
+    	while (true)
+    	{	
+    		yield return new WaitForSeconds(15);
+	    	switch (platform)
+	        {
+	            case Platform.Editor:
+	                Debug.Log($"<color={colorDebug}>INTERSTITIAL LOAD</color>");
+	                break;
+	            case Platform.VK:
+	                Utils.VK_AdInterCheck();
+	                break;
+	        }
+    	}
     }
 
 
     IEnumerator BannerVK()
     {
-        yield return new WaitForSeconds(5);
-        ShowBannerAd();
+    	yield return new WaitForSeconds(5);
+    	ShowBannerAd();
     }
 
-    public void ShowBannerAd()
+    public void ShowBannerAd() 
     {
         switch (platform)
         {
@@ -371,7 +371,7 @@ public class Init : MonoBehaviour
                 break;
             case Platform.Yandex:
                 if (wasLoad)
-                {
+                {   
                     Debug.Log("LOAD");
                     Utils.LoadExtern();
                 }
@@ -412,7 +412,7 @@ public class Init : MonoBehaviour
 
 
 
-
+    
 
     //В ДОРАБОТКЕ
     public void RealBuyItem(string idOrTag) //открыть окно покупки
@@ -444,7 +444,7 @@ public class Init : MonoBehaviour
     {
         if (purchasedTag == "purchasedID")
         {
-
+            
         }
     }
 
@@ -452,13 +452,13 @@ public class Init : MonoBehaviour
     {
         if (purchasedTag == "purchasedID")
         {
-
+            
         }
     }
 
     public void LeaderboardBtn(int value) //Для кнопки лидерборда в VK
     {
-        //value = playerData.Level;
+    	//value = playerData.Level;
         switch (platform)
         {
             case Platform.Editor:

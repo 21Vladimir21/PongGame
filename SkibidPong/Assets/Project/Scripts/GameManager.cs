@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject PingPongPanel;
     [SerializeField] private GameObject BlueWinPanel;
     [SerializeField] private GameObject RedWinPanel;
+    [SerializeField] private GameObject PongUi;
+    [SerializeField] private GameObject HelpInfoAi;
 
     private int numberOfGames = 0;
 
@@ -63,13 +65,20 @@ public class GameManager : MonoBehaviour
         PingPongPanel.SetActive(true);
         RedWinPanel.SetActive(false);
         BlueWinPanel.SetActive(false);
+        PongUi.SetActive(false);
         UI.RefreshScore.Invoke(scoreManager.BluePlayerScore, scoreManager.RedPlayerScore);
         ballPosition.position = Vector2.zero;
     }
     public void PlayButton(bool enemyAi)
     {
+        if (enemyAi)
+            HelpInfoAi.SetActive(false);
+        else
+            HelpInfoAi.SetActive(true);
+
         EnemyAi = enemyAi;
         PingPongPanel.SetActive(false);
         PingPong.SetActive(true);
+        PongUi.SetActive(true);
     }
 }
