@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Kimicu.YandexGames;
 using UnityEngine;
 
 abstract public class MoveLogic : MonoBehaviour
@@ -10,7 +7,7 @@ abstract public class MoveLogic : MonoBehaviour
     [SerializeField] protected float PlayerSpeed = 3;
     void Update()
     {
-        if (Init.Instance.mobile == false)
+        if (Device.IsMobile == false)
             Move();
     }
 

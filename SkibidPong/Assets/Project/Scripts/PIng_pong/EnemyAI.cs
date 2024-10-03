@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Rigidbody2D redPlayerRb;
     [SerializeField] private Transform ball;
-    private float MoveSpeed = 3;
+    [SerializeField]private float MoveSpeed = 3;
     private bool AllowedToMove = false;
     private IEnumerator Start()
     {

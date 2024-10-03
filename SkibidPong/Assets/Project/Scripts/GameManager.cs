@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Kimicu.YandexGames;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,51 +17,57 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject PongUi;
     [SerializeField] private GameObject HelpInfoAi;
 
-    private int numberOfGames = 0;
+    [SerializeField] private Button backToMenuButton;
 
     public bool EnemyAi = false;
 
 
     public static UnityEvent WhoWon = new UnityEvent();
+
     private void Awake()
     {
         WhoWon.AddListener(WhoWonPong);
+        backToMenuButton.onClick.AddListener(BackToMenu);
     }
 
     private void WhoWonPong()
     {
         if (scoreManager.BluePlayerScore >= 5)
-            StartCoroutine(WinScrens(true));
+            WinScreens(true);
 
         if (scoreManager.RedPlayerScore >= 5)
-
-            StartCoroutine(WinScrens(false));
+            WinScreens(false);
     }
-    public void ResetScore()
+
+    private void ResetScore()
     {
         scoreManager.BluePlayerScore = 0;
         scoreManager.RedPlayerScore = 0;
     }
-    private IEnumerator WinScrens(bool blueWin)
+
+    private void WinScreens(bool blueWin)
     {
         if (!blueWin)
             RedWinPanel.SetActive(true);
         if (blueWin)
             BlueWinPanel.SetActive(true);
-
-        yield return new WaitForSeconds(3);
-        numberOfGames++;
-        ResetScore();
-        BackToMenu();
+        
+        backToMenuButton.gameObject.SetActive(true);
+        
+        
     }
 
     public void BackToMenu()
     {
-        if (numberOfGames == 3)
-            Init.Instance.RateGameFunc();
-        if (numberOfGames != 3)
-            Init.Instance.ShowInterstitialAd();
+        if (Advertisement.AdvertisementIsAvailable)
+            Advertisement.ShowInterstitialAd(onCloseCallback: EndLevel);
+        else
+            EndLevel();
+    }
 
+    private void EndLevel()
+    {
+        backToMenuButton.gameObject.SetActive(false);
         ResetScore();
         PingPong.SetActive(false);
         PingPongPanel.SetActive(true);
@@ -68,7 +76,9 @@ public class GameManager : MonoBehaviour
         PongUi.SetActive(false);
         UI.RefreshScore.Invoke(scoreManager.BluePlayerScore, scoreManager.RedPlayerScore);
         ballPosition.position = Vector2.zero;
+        
     }
+
     public void PlayButton(bool enemyAi)
     {
         if (enemyAi)
