@@ -3425,8 +3425,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 276}
-  m_SizeDelta: {x: 869.9464, y: 305.5389}
+  m_AnchoredPosition: {x: -9, y: 353}
+  m_SizeDelta: {x: 1721.26, y: 292.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1642851760
 MonoBehaviour:
@@ -4672,8 +4672,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.73, y: -152.77}
-  m_SizeDelta: {x: 792.38, y: 268.87}
+  m_AnchoredPosition: {x: -8, y: -142}
+  m_SizeDelta: {x: 1371.9, y: 173.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2105042497
 MonoBehaviour:
@@ -4695,7 +4695,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Skibidi Ping-Pong \n"
+  m_text: "\u0421\u043A\u0443\u043B\u0431\u043E\u0439: \u041F\u0438\u043D\u0433-\u041F\u043E\u043D\u0433
+    \u0436\u043E\u043F\u0430 \u043C\u0430\u043B\u0438\u043D\u043E\u0432\u0430\u044F\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -4722,7 +4723,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90.25
+  m_fontSize: 63.35
   m_fontSizeBase: 79.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
