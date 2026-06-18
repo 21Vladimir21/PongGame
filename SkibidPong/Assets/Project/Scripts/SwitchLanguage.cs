@@ -21,7 +21,7 @@ public class SwitchLanguage : MonoBehaviour
 #endif
         if (lang == "ru")
         {
-            gameName.text = "Скул бой: Пинг-Понг";
+            gameName.text = "Скулбой: битва за домашку";
             gameInfo.text = "Отбивайте домашку , забей 5 голов и победи!";
             blueWin.text = "Уроков не будет!";
             redWin.text = "Иди делать уроки!";
@@ -57,7 +57,7 @@ public class SwitchLanguage : MonoBehaviour
 
         if (lang == "en")
         {
-            gameName.text = "School Boy: Ping-Pong";
+            gameName.text = "Schoolboy: battle for homework";
             gameInfo.text = "Beat your homework, score 5 goals and win!";
             blueWin.text = "There will be no lessons!";
             redWin.text = "Go do your homework!";
